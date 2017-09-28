@@ -53,6 +53,10 @@ AFLAGS.gpt.S= ${${ACTIVE_CC} == "clang":?-no-integrated-as:}
 CPPFLAGS+= -DLOADADDR=${LOADADDR}
 .endif # defined(__MINIX)
 
+# LSC: Still required by our old binutils
+# AFLAGS.mbr.S+= -Wa,--divide
+AFLAGS+= -Wa,--divide
+
 ${PROG}: ${OBJS}
 	${_MKTARGET_LINK}
 .if defined(__MINIX)
