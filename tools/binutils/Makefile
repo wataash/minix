@@ -16,6 +16,9 @@ CONFIGURE_ARGS=	--target=${MACHINE_GNU_PLATFORM} --disable-nls \
 		--disable-werror \
 		${BRANDING}
 
+# wataash
+CONFIGURE_ARGS+=	CFLAGS='-O0 -g'
+
 .if defined(__MINIX) && ! exists(${GNUHOSTDIST}/gas/m68k-parse.c)
 # MINIX: LSC: Make sure we trigger the fetch rule
 .include "${.CURDIR}/../../minix/Makefile.fetchgnu"

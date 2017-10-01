@@ -2232,8 +2232,13 @@ main()
 
 		cleandir|obj|build|distribution|release|sourcesets|syspkgs|show-params)
 			# wataash
-			${runcmd} "${makewrapper}" ${parallel} ${op} ||
+			if [ x"$DRYRUN" = x"yes" ]; then
+				echo DRYRUN:
+				echo "${runcmd} \"${makewrapper}\" ${parallel} ${op} || bomb \"Failed to make ${op}\""
+			else
+				${runcmd} "${makewrapper}" ${parallel} ${op} ||
 			    bomb "Failed to make ${op}"
+			fi
 			statusmsg "Successful make ${op}"
 			;;
 
