@@ -259,7 +259,7 @@ fi
 # }}} End shell feature tests.
 #
 
-progname=${0##*/}
+progname=${0##*/}  # wsh: bashdb
 toppid=$$
 results=/dev/null
 tab='	'
@@ -402,8 +402,10 @@ set_HOST_SH()
 	# If we get the wrong result here, the user can override it by
 	# specifying HOST_SH in the environment.
 	#
+	# wataash: with bashdb, HOST_SH '' -> 'bashdb'
 	[ -z "${HOST_SH}" ] && HOST_SH="$(
 		(ps -p $$ -o comm | sed -ne "2s/[ ${tab}]*\$//p") 2>/dev/null )"
+	[ x"${HOST_SH}" = x"bashdb" ] && HOST_SH="bash"
 
 	# If nothing above worked, use "sh".  We will later find the
 	# first directory in the PATH that has a "sh" program.
@@ -2229,6 +2231,7 @@ main()
 			;;
 
 		cleandir|obj|build|distribution|release|sourcesets|syspkgs|show-params)
+			# wataash
 			${runcmd} "${makewrapper}" ${parallel} ${op} ||
 			    bomb "Failed to make ${op}"
 			statusmsg "Successful make ${op}"
