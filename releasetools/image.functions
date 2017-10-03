@@ -58,7 +58,10 @@ build_workdir()
 				exit 1
 			fi
 			echo " * Extracting $set..."
-			(cd ${ROOT_DIR}; ${CROSS_TOOLS}/nbpax -rnz -f ${SETS_DIR}/${set}.tgz .)
+			# on darwin:
+			# /Users/wsh/src/minix/obj.i386/tooldir.Darwin-15.6.0-x86_64/bin/nbpax -rnz -f /Users/wsh/src/minix/obj.i386/releasedir/i386/binary/sets/minix-man.tgz .
+			# => pax: Cannot link file ./usr/man/man3/archive_read.3 to itself
+			[ x"$set" != x"minix-man" ] && (cd ${ROOT_DIR}; ${CROSS_TOOLS}/nbpax -rnz -f ${SETS_DIR}/${set}.tgz .)
 		done
 
 		# add rc (if any)
