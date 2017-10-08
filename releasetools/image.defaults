@@ -1,5 +1,6 @@
 : ${OBJ=../obj.${ARCH}}
-: ${CROSS_TOOLS=${OBJ}/"tooldir.`uname -s`-`uname -r`-`uname -m`"/bin}
+# : ${CROSS_TOOLS=${OBJ}/"tooldir.`uname -s`-`uname -r`-`uname -m`"/bin}
+: ${CROSS_TOOLS=../tooldir.i386/bin}
 : ${CROSS_PREFIX=${CROSS_TOOLS}/${TOOLCHAIN_TRIPLET}}
 : ${JOBS=1}
 : ${DESTDIR=${OBJ}/destdir.$ARCH}
